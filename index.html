@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class=" bg-gray-400">
+    <div class="bg-slate-400 text-cyan-800 text-4xl font-bold h-16 w-full text-center  ">
+    <h1 >Image Resizer</h1>
+  </div>
+    <form  class="text-center mt-8 text-xl" id="upload-form">
+        <input type="file" id="image-input" accept="image/*">
+    </form>
+    <div  class=" text-xl px-80 mt-4" id="image-container">
+        <img id="uploaded-image" src="#" alt="Uploaded Image "/>
+    </div>
+    <div class="mt-40 m-20 space-x-4 space-y-4 text-center">
+    <button class=" font-bold text-white rounded-full bg-gradient-to-r from-orange-900 to-red-400 hover:bg-gradient-to-l  from-orange-900 to-red-400 px-2 py-3 w-56 "  id="resize-button-instagram">Instagram (1080x1080)</button>
+    <button class="font-bold text-white rounded-full  bg-gradient-to-r from-blue-900 to-gray-500 hover:bg-gradient-to-l from-blue-900 to-gray-500 px-2 py-3 w-56"  id="resize-button-facebook">Facebook (1200x630)</button>
+    <button class="font-bold text-white rounded-full bg-gradient-to-r from-gray-900 hover:bg-gradient-to-l from-gray-900 px-2 py-3 w-56"    id="resize-button-twitter">Twitter (1200x675)</button>
+    <button class=" font-bold text-white rounded-full bg-gradient-to-r from-pink-600 hover:bg-gradient-to-l from-pink-600 to-red-300  px-2 py-3 w-56 "  id="resize-button-website">Website (600x300)</button>
+</div>
+
+    <script>
+        // Function to display the selected image
+        document.getElementById('image-input').addEventListener('change', function () {
+            const imageContainer = document.getElementById('image-container');
+            const uploadedImage = document.getElementById('uploaded-image');
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    uploadedImage.src = e.target.result;
+                    imageContainer.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                imageContainer.style.display = 'none';
+            }
+        });
+
+        // Function to resize the image to specific dimensions when a button is clicked
+        document.getElementById('resize-button-instagram').addEventListener('click', function () {
+            resizeImage(1080, 1080);
+        });
+
+        document.getElementById('resize-button-facebook').addEventListener('click', function () {
+            resizeImage(1200, 630);
+        });
+
+        document.getElementById('resize-button-twitter').addEventListener('click', function () {
+            resizeImage(1200, 675);
+        });
+
+        document.getElementById('resize-button-website').addEventListener('click', function () {
+            resizeImage(600, 300);
+        });
+
+        // Function to resize the image
+        function resizeImage(width, height) {
+            const uploadedImage = document.getElementById('uploaded-image');
+
+            // Set the width and height of the image
+            uploadedImage.width = width;
+            uploadedImage.height = height;
+        }
+    </script>
+</body>
+
+</html>
